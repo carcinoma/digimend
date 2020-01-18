@@ -144,7 +144,7 @@ static __u8 *hanwang_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 	switch (hdev->product)
 	{
 	case USB_DEVICE_ID_PARBLO_A609:
-	case USB_DEVICE_ID_SIGNOTEC_VIEWSONIC_PD1011:
+	case USB_DEVICE_ID_INTEY_NY_BG14:
 		if (*rsize == HANWANG_RDESC_PARBLO_A609_ORIG_SIZE)
 		{
 			rdesc = hanwang_rdesc_parblo_a609_fixed;
@@ -187,6 +187,8 @@ static int hanwang_init(struct hid_device *hdev)
 		hid_err(hdev, "Can't set operational mode\n");
 		return ret;
 	}
+	
+        hid_info(hdev, "Set operational mode successfully\n");
 	return 0;
 }
 
@@ -248,8 +250,9 @@ static int hanwang_raw_event(struct hid_device *hdev,
 
 		// tiltY - 6 bits
 		data[9] = tiltY;
-		// hid_err(hdev, "fixed data: X=>%d; Y=>%d; pressure=>%04d; tiltX=>%03d; tiltY=>%03d\n", pos_x, pos_y, pressure, tiltX, tiltY);
+		//hid_err(hdev, "fixed data: X=>%d; Y=>%d; pressure=>%04d; tiltX=>%03d; tiltY=>%03d\n", pos_x, pos_y, pressure, tiltX, tiltY);
 	}
+        //hid_info(hdev, "fixed data: X=>%d; Y=>%d; pressure=>%04d; tiltX=>%03d; tiltY=>%03d\n", pos_x, pos_y, pressure, tiltX, tiltY);
 	return 0;
 }
 
